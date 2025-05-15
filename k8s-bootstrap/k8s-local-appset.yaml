@@ -1,0 +1,63 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: k8s-local-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/anwendt/bootstrap-dev.git
+        revision: HEAD
+        directories:
+          - path: k8s-localapps/* #examples/k8s-localapps/*
+  template:
+    metadata:
+      name: "{{path.basename}}"
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: k8s-localapps #examples/k8s-localapps
+        argocd.argoproj.io/compare-options: ServerSideDiff=true
+    spec:
+      project: k8s-local-apps-project
+      source:
+        repoURL: https://github.com/anwendt/bootstrap-dev.git
+        targetRevision: HEAD
+        path: "k8s-localapps/{{path.basename}}" #"examples/k8s-localapps/{{path.basename}}"
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+            - values.yaml
+            - ../globalValues.yaml
+            - secrets://?secrets.yaml
+            # check also https://github.com/jkroepke/helm-secrets/issues/276
+      destination:
+        name: in-cluster
+        namespace: "{{path.basename}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - Validate=false
+          - CreateNamespace=true
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true
+          - ServerSideApply=true
+          - ApplyOutOfSyncOnly=true
+          - SkipDryRunOnMissingResource=true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
+      ignoreDifferences:     # check also: https://github.com/argoproj/argo-cd/issues/11143, https://github.com/argoproj/argo-cd/issues/11074#issuecomment-1298825859
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          jqPathExpressions:
+            - '.spec.endpoints[]?.relabelings[]?.action'
+        - group: apps
+          kind: StatefulSet
+          jqPathExpressions:
+            - '.spec.volumeClaimTemplates[]?'
