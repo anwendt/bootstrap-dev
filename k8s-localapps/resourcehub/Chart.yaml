@@ -3,10 +3,10 @@ name: resourcehub
 description: Helm Chart to install Crossplane and configure it with custom compositions
 type: application
 version: 0.1.0
-appVersion: "1.15.0"
+appVersion: "1.19.1"
 dependencies:
   - name: crossplane
-    version: 1.15.0
+    version: 1.19.1
     repository: https://charts.crossplane.io/stable
   - name: crossplane-config
     version: 0.1.0
