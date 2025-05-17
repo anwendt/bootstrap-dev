@@ -1,0 +1,9 @@
+crossplane:
+  installCRDs: true
+  args:
+    - --enable-composition-revisions
+
+crossplane-config:
+  enabled: true
+  compositions:
+    enabled: true
