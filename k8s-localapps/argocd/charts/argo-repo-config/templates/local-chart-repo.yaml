@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: local-chart-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+stringData:
+  name: local-chart-repo
+  type: helm
+  enableOCI: "true"
+  url: {{ .Values.ociRepo.url }}
+  username: {{ .Values.ociRepo.username }}
+  password: {{ .Values.ociRepo.password }}
+  ForceHttpBasicAuth: "true"

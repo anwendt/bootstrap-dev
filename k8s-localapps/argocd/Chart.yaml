@@ -1,0 +1,15 @@
+apiVersion: v2
+name: argocd
+description: argocd update chart including the repository configuration
+version: "v0.1.0"
+appVersion: "v0.1.0"
+type: application
+dependencies:
+  - name: argo-repo-config
+    version: v0.1.0
+  - name: argocd-helm-deployment
+    version: "0.2.0"
+  - name: dashboard
+    version: "0.1.0"
+  - name: argo-git-repo
+    version: "1.0.0"

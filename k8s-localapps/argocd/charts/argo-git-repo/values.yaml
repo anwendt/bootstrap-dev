@@ -1,0 +1,7 @@
+repositories:
+  - name: repo1
+    url: https://github.com/org/repo1.git
+    token: ghp_exampleToken1
+  - name: repo2
+    url: https://github.com/org/repo2.git
+    token: ghp_exampleToken2

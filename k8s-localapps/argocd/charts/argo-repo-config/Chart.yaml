@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argo-repo-config
+description: argcod helm chart oci config
+version: "v0.1.0"
+appVersion: "v0.1.0"
+type: application

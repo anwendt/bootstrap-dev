@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argocd-helm-deployment
+description: argocd deployment via rancher helm chart operator
+version: "0.2.0"
+appVersion: "2.10.7"
+type: application

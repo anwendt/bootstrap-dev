@@ -1,0 +1,17 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  chart: {{ .Values.chartConfig.chart }}
+#  repo: {{ .Values.chartConfig.repo }}
+  version: {{ .Values.chartConfig.version }}
+  targetNamespace: {{ .Values.chartConfig.namespace }}
+  dockerRegistrySecret: 
+    name: helm-oci-repo-secret
+  valuesContent: |-
+{{ .Values.chartConfig.valuesContent | indent 4 }}
+        
