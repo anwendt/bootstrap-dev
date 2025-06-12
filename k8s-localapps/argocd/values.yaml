@@ -8,6 +8,7 @@ argo-git-repo:
   externalClusterConfig: false
   clusterconfigImage: tsigitopsacr.azurecr.io/tsigitops/kubectl:v1.30.6-tsigitops1
   clusterconfigNamespace: argocd
+  repositories: []
 
 argocd-helm-deployment:
   chartConfig:
