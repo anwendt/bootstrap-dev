@@ -9,7 +9,7 @@ dependencies:
     version: v0.1.0
   - name: argocd-helm-deployment
     version: "0.2.0"
-  - name: dashboard
-    version: "0.1.0"
-  - name: argo-git-repo
-    version: "1.0.0"
+#  - name: dashboard
+#    version: "0.1.0"
+#  - name: argo-git-repo
+#    version: "1.0.0"
