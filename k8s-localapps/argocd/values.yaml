@@ -1,18 +1,5 @@
-argo-repo-config:
-  ociRepo:
-    url: tsigitopsacr.azurecr.io
-    username: tsigitopsreadtoken
-    email: ""
-
-argo-git-repo:
-  externalClusterConfig: false
-  clusterconfigImage: tsigitopsacr.azurecr.io/tsigitops/kubectl:v1.30.6-tsigitops1
-  clusterconfigNamespace: argocd
-  repositories: []
-
-argocd-helm-deployment:
+argocd-chart:
   chartConfig:
- #   repo: oci://dtmbdevops.azurecr.io/dtmbdevopscharts/argo-cd
     version: 8.0.14
     namespace: argocd
     chart: oci://ghcr.io/argoproj/argo-helm/argo-cd
