@@ -10,8 +10,10 @@ spec:
 #  repo: {{ .Values.chartConfig.repo }}
   version: {{ .Values.chartConfig.version }}
   targetNamespace: {{ .Values.chartConfig.namespace }}
-  dockerRegistrySecret: 
-    name: helm-oci-repo-secret
+{{- if .Values.chartConfig.dockerRegistrySecretName }}
+  dockerRegistrySecret:
+    name: {{ .Values.chartConfig.dockerRegistrySecretName }}
+{{- end }}
   valuesContent: |-
 {{ .Values.chartConfig.valuesContent | indent 4 }}
         

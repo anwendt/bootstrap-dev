@@ -2,6 +2,8 @@ argocd-chart:
   chartConfig:
     version: 8.0.14
     namespace: argocd
+    # dockerRegistrySecretName: helm-oci-repo-secret
+    dockerRegistrySecretName: ""
     chart: oci://ghcr.io/argoproj/argo-helm/argo-cd
     valuesContent: |-
       configs:
